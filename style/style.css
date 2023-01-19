@@ -159,7 +159,7 @@ button {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.forecast- .forecast-time {
+.forecast-time {
   text-align: center;
 }
 
@@ -184,7 +184,7 @@ button {
   #flex {
     width: 80%;
     height: 80%;
-    margin-top: 2em;
+    margin-top: 3em;
     display: flex;
     flex-direction: column;
   }
@@ -197,8 +197,8 @@ button {
   #flex > #icon {
     position: absolute;
     z-index: 1;
-    right: 1.5em;
-    top: 1.2em;
+    right: 0.5em;
+    top: 0.5em;
   }
 
   #flex > #main {
@@ -210,9 +210,41 @@ button {
   }
 
   .container-icon {
-    font-size: 40px;
+    font-size: 50px;
     padding: 10px 5px;
     display: flex;
     justify-content: center;
+  }
+
+  .city-title {
+    font-size: x-large;
+  }
+
+  .city-temp {
+    font-size: large;
+    margin-bottom: 0.5em;
+  }
+
+  .temp-switcher {
+    font-size: large;
+  }
+
+  .forecast-option {
+    font-size: large;
+  }
+
+  .forecast {
+    font-size: small;
+  }
+
+  .forecast-container {
+    padding: 2em 1em;
+  }
+
+  .forecasts {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.8em;
+    gap: 0.5em;
   }
 }
