@@ -15,6 +15,11 @@ let defaultTemp = true;
 switcherTemp.textContent = "|°F"; //initlialize metric
 let forecastTemplate = document.querySelector("#forecast-template");
 let forecasts = document.querySelector(".forecasts");
+let switcherWeek = document.querySelector(".forecast-week");
+let defaultWeek = true;
+switcherWeek.textContent = "| WEEK";
+let fixWeek = document.querySelector(".forecast-today");
+fixWeek.textContent = "TODAY";
 
 btnSubmit.addEventListener("click", (e) => {
   e.preventDefault();
@@ -26,10 +31,18 @@ btnSubmit.addEventListener("click", (e) => {
 
 switcherTemp.addEventListener("click", (e) => {
   defaultTemp = !defaultTemp;
-  console.log(defaultTemp);
   defaultTemp
     ? (switcherTemp.textContent = "|°F")
     : (switcherTemp.textContent = "|°C");
+  clearElement(forecasts);
+  render();
+});
+
+switcherWeek.addEventListener("click", (e) => {
+  defaultWeek = !defaultWeek;
+  defaultWeek
+    ? (switcherWeek.textContent = "| WEEK") && (fixWeek.textContent = "TODAY")
+    : (switcherWeek.textContent = "| TODAY") && (fixWeek.textContent = "WEEK");
   clearElement(forecasts);
   render();
 });
@@ -72,15 +85,16 @@ function fillIcon(data) {
   iconWeather.className = `wi wi-owm-${des} icon`;
 }
 
+//load forecast data
 async function loadDataForecast(cityName, met) {
   defaultTemp ? (met = "metric") : (met = "imperial");
-  const response2 = await fetch(
+  const response = await fetch(
     `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&APPID=42d3755ff9952be93382336dbfe4f4ff&units=${met}`,
     { mode: "cors" }
   );
-  const data2 = await response2.json();
-  fillDataForecast(data2);
-  console.log(data2);
+  const data = await response.json();
+  defaultWeek ? fillDataForecastToday(data) : fillDataForecastWeek(data);
+  console.log(data);
 }
 
 function getDay(date) {
@@ -93,15 +107,32 @@ function getDay(date) {
     "Friday",
     "Saturday",
   ];
-  return days[new Date(date).getDay()];
+  return days[new Date(date * 1000).getDay()];
 }
 
 function getTime(date) {
   return date.split(" ")[1].substring(0, 5);
 }
 
-function fillDataForecast(data) {
+function fillDataForecastToday(data) {
   for (let i = 0; i < 3; i++) {
+    const forecastElement = document.importNode(forecastTemplate.content, true);
+
+    let forecastTime = forecastElement.querySelector(".forecast-time");
+    let forecastIcon = forecastElement.querySelector(".forecast-icon");
+    let forecastDegree = forecastElement.querySelector(".forecast-degree");
+
+    forecastTime.textContent =
+      getDay(data.list[i].dt) + " " + getTime(data.list[i].dt_txt);
+    forecastIcon.className = `forecast-icon wi wi-owm-${data.list[i].weather[0].id} icon`;
+    forecastDegree.textContent = data.list[i].main.temp;
+
+    forecasts.appendChild(forecastElement);
+  }
+}
+
+function fillDataForecastWeek(data) {
+  for (let i = 8; i < 25; i += 8) {
     const forecastElement = document.importNode(forecastTemplate.content, true);
 
     let forecastTime = forecastElement.querySelector(".forecast-time");
