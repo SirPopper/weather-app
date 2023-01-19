@@ -173,3 +173,40 @@ button {
   text-align: center;
   padding: 0.5em 0;
 }
+
+@media all and (max-width: 500px) {
+  .main-container {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+
+  #flex {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #flex > #search {
+    order: 1;
+  }
+
+  #flex > #icon {
+    order: 2;
+  }
+
+  #flex > #main {
+    order: 3;
+  }
+
+  #flex > #forecast {
+    order: 4;
+  }
+
+  .container-icon {
+    font-size: 40px;
+    padding: 10px 5px;
+    display: flex;
+    justify-content: center;
+  }
+}
