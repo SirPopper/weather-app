@@ -81,9 +81,10 @@ function fillData(data) {
   cityWind.textContent =
     data.wind.speed + (defaultTemp ? " m/sec" : " miles/h");
   sunrise.textContent =
-    "Sunrise " + dateToTime(data.sys.sunrise + data.timezone);
+    "Sunrise " + dateToTime(data.sys.sunrise + data.timezone - 3600);
   console.log(data.sys.sunrise);
-  sunset.textContent = "Sunset " + dateToTime(data.sys.sunset + data.timezone);
+  sunset.textContent =
+    "Sunset " + dateToTime(data.sys.sunset + data.timezone - 3600);
 }
 
 function dateToTime(date) {
