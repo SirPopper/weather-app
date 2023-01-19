@@ -45,7 +45,11 @@
           <i class="wi wi-owm-804 icon"></i>
         </div>
         <div id="main" class="container-current background">
-          <div class="city-title"></div>
+          <div class="city-title-container">
+            <div class="city-title"></div>
+            <div class="city-country"></div>
+          </div>
+
           <div class="city-container">
             <div class="city-left">
               <div class="temp-switcher">
@@ -54,6 +58,10 @@
               </div>
 
               <div class="city-weather"></div>
+              <div class="sun-container">
+                <div class="sunrise">Sunrise</div>
+                <div class="sunset">Sunset</div>
+              </div>
             </div>
 
             <div class="city-right">
@@ -68,8 +76,8 @@
               </div>
 
               <div class="city-right-add">
-                <div>Chance of Rain</div>
-                <div class="city-rain add-info">different API</div>
+                <div>Weather description</div>
+                <div class="city-desc add-info"></div>
               </div>
 
               <div class="city-right-add">
@@ -83,7 +91,12 @@
         <div id="search" class="form-city">
           <form action="">
             <label for="location"></label>
-            <input type="text" id="location" class="location-form" />
+            <input
+              type="text"
+              id="location"
+              placeholder="City"
+              class="location-form"
+            />
             <button class="btn-submit">
               <svg
                 class="icon-search"

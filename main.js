@@ -2,11 +2,12 @@ let locationInput = document.querySelector(".location-form");
 let btnSubmit = document.querySelector(".btn-submit");
 let city = document.querySelector(".city-title");
 let cityName = "munich"; //initilize first city
+let cityCountry = document.querySelector(".city-country");
 let cityTemp = document.querySelector(".city-temp");
 let cityWeather = document.querySelector(".city-weather");
 let cityFeel = document.querySelector(".city-feels");
 let cityHum = document.querySelector(".city-hum");
-let cityRain = document.querySelector(".city-rain"); //need from different API
+let cityDesc = document.querySelector(".city-desc");
 let cityWind = document.querySelector(".city-wind");
 let iconWeather = document.querySelector(".wi");
 let switcherTemp = document.querySelector(".city-metric");
@@ -20,6 +21,8 @@ let defaultWeek = true;
 switcherWeek.textContent = "| WEEK";
 let fixWeek = document.querySelector(".forecast-today");
 fixWeek.textContent = "TODAY";
+let sunrise = document.querySelector(".sunrise");
+let sunset = document.querySelector(".sunset");
 
 btnSubmit.addEventListener("click", (e) => {
   e.preventDefault();
@@ -60,28 +63,38 @@ async function loadData(city, defaultTemp) {
     { mode: "cors" }
   );
   const data = await response.json();
-  console.log(data);
   fillData(data);
   fillIcon(data);
+  console.log(data);
   return data;
 }
 
 //fill data from API
 function fillData(data) {
   city.textContent = data.name.toUpperCase();
+  cityCountry.textContent = data.sys.country;
   cityTemp.textContent = data.main.temp + (defaultTemp ? "°C" : "°F");
   cityWeather.textContent = data.weather[0].main.toUpperCase();
   cityFeel.textContent = data.main.feels_like + (defaultTemp ? "°C" : "°F");
-  cityFeel.textContext = data.main.humidity;
+  cityDesc.textContent = data.weather[0].description;
   cityHum.textContent = data.main.humidity + "%";
   cityWind.textContent =
     data.wind.speed + (defaultTemp ? " m/sec" : " miles/h");
+  sunrise.textContent =
+    "Sunrise " + dateToTime(data.sys.sunrise + data.timezone);
+  console.log(data.sys.sunrise);
+  sunset.textContent = "Sunset " + dateToTime(data.sys.sunset + data.timezone);
+}
+
+function dateToTime(date) {
+  let time = new Date(date * 1000).toString();
+  time = time.split(" ")[4].substring(0, 5);
+  return time;
 }
 
 //fill data for Icon
 function fillIcon(data) {
   const des = data.weather[0].id;
-  console.log(des);
   iconWeather.className = `wi wi-owm-${des} icon`;
 }
 
@@ -94,7 +107,6 @@ async function loadDataForecast(cityName, met) {
   );
   const data = await response.json();
   defaultWeek ? fillDataForecastToday(data) : fillDataForecastWeek(data);
-  console.log(data);
 }
 
 function getDay(date) {

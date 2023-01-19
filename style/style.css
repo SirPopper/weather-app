@@ -70,6 +70,11 @@ form {
   cursor: pointer;
 }
 
+::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+}
+
 button {
   background: none;
   border: none;
@@ -83,6 +88,9 @@ button {
 
 .city-title {
   font-size: xx-large;
+}
+
+.city-country {
   margin-bottom: 1em;
 }
 
@@ -99,7 +107,7 @@ button {
 
 .city-temp {
   font-size: x-large;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.2em;
 }
 
 .city-metric {
@@ -118,6 +126,21 @@ button {
   transform: scale(1);
 }
 
+.city-weather {
+}
+
+.sun-container {
+  position: absolute;
+  gap: 1.5rem;
+  bottom: 2rem;
+}
+
+.sunrise,
+.sunset {
+  font-size: small;
+}
+
+/* right side */
 .city-right {
   text-align: right;
 }
@@ -210,10 +233,14 @@ button {
   }
 
   .container-icon {
-    font-size: 50px;
+    font-size: 60px;
     padding: 10px 5px;
     display: flex;
     justify-content: center;
+  }
+
+  .sun-container {
+    font-size: 10px;
   }
 
   .city-title {
