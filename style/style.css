@@ -128,3 +128,39 @@ button {
   font-size: medium;
   margin-bottom: 0.5em;
 }
+
+/* forecast */
+.forecast-container {
+  padding: 2em;
+}
+
+.forecasts {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2em;
+}
+
+.forecast {
+  display: flex;
+  flex-direction: column;
+}
+
+.forecast-title {
+  font-size: x-large;
+  margin-bottom: 2em;
+}
+
+.forecast-time {
+  text-align: center;
+}
+
+.forecast-icon {
+  font-size: 40px;
+  text-align: center;
+  padding: 0.5em 0;
+}
+
+.forecast-degree {
+  text-align: center;
+  padding: 0.5em 0;
+}

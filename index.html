@@ -99,8 +99,18 @@
           </form>
         </div>
 
-        <div class="container-forecast background"></div>
+        <div class="forecast-container background">
+          <div class="forecast-title">TODAY</div>
+          <div class="forecasts"></div>
+        </div>
       </div>
     </div>
+    <template id="forecast-template">
+      <div class="forecast">
+        <div class="forecast-time"></div>
+        <div class="forecast-icon"></div>
+        <div class="forecast-degree"></div>
+      </div>
+    </template>
   </body>
 </html>
