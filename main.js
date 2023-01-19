@@ -56,7 +56,7 @@ function clearElement(element) {
 async function loadData(city, defaultTemp) {
   defaultTemp ? (met = "metric") : (met = "imperial");
   const response = await fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=42d3755ff9952be93382336dbfe4f4ff&units=${met}`,
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=42d3755ff9952be93382336dbfe4f4ff&units=${met}`,
     { mode: "cors" }
   );
   const data = await response.json();
@@ -89,7 +89,7 @@ function fillIcon(data) {
 async function loadDataForecast(cityName, met) {
   defaultTemp ? (met = "metric") : (met = "imperial");
   const response = await fetch(
-    `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&APPID=42d3755ff9952be93382336dbfe4f4ff&units=${met}`,
+    `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&APPID=42d3755ff9952be93382336dbfe4f4ff&units=${met}`,
     { mode: "cors" }
   );
   const data = await response.json();
